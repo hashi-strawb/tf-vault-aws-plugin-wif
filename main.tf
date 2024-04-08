@@ -58,7 +58,6 @@ resource "vault_aws_secret_backend" "aws" {
   path                    = "aws/lmhd/test-oidc"
   identity_token_audience = var.oidc_audience
   role_arn                = aws_iam_role.plugins_role.arn
-  identity_token_ttl      = "60"
 }
 
 resource "vault_aws_secret_backend_role" "test" {
