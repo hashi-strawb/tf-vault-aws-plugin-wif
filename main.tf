@@ -64,8 +64,12 @@ provider "vault" {
 
 
 
-# TODO: identity/oidc/config
-
+resource "vault_generic_endpoint" "identity_config" {
+  path = "identity/oidc/config"
+  data_json = jsonencode({
+    "issuer" = "https://vault-plugin-wif.lucy-davinhart.sbx.hashidemos.io"
+  })
+}
 
 
 
