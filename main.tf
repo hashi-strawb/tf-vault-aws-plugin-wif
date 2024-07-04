@@ -114,6 +114,17 @@ resource "vault_aws_secret_backend" "aws" {
   username_template = local.username_template_without_whitespace
 }
 
+resource "vault_generic_endpoint" "aws-lmhd-lease" {
+  path = "${vault_aws_secret_backend.aws.path}/config/lease"
+
+  data_json = <<EOT
+{
+  "lease": "5m0s",
+  "lease_max": "2h0m0s"
+}
+EOT
+}
+
 resource "vault_aws_secret_backend_role" "test" {
   backend         = vault_aws_secret_backend.aws.path
   name            = "test"
