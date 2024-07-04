@@ -69,6 +69,9 @@ resource "vault_generic_endpoint" "identity_config" {
   data_json = jsonencode({
     "issuer" = "https://vault-plugin-wif.lucy-davinhart.sbx.hashidemos.io"
   })
+
+  // delete on this path is unsupported
+  disable_delete = true
 }
 
 
@@ -123,6 +126,10 @@ resource "vault_generic_endpoint" "aws-lmhd-lease" {
   "lease_max": "2h0m0s"
 }
 EOT
+
+
+  // delete on this path is unsupported
+  disable_delete = true
 }
 
 resource "vault_aws_secret_backend_role" "test" {
