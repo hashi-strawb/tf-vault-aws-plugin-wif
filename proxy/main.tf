@@ -139,6 +139,11 @@ resource "aws_acm_certificate_validation" "example" {
 #
 
 resource "aws_api_gateway_domain_name" "example" {
+  depends_on = [
+    // need to wait for the validation to finish before we can use the domain
+    aws_acm_certificate_validation.example
+  ]
+
   domain_name              = aws_acm_certificate.example.domain_name
   regional_certificate_arn = aws_acm_certificate.example.arn
 
